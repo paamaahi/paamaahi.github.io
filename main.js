@@ -1,4 +1,3 @@
-// سیستم تغییر زبان (دو زبانه)
 let currentLang = 'fa';
 
 function toggleLang() {
@@ -19,14 +18,12 @@ function toggleLang() {
         document.body.style.fontFamily = "var(--font-fa)";
     }
 
-    // تغییر متن‌ها بر اساس ویژگی data-fa و data-en
     const elements = document.querySelectorAll('[data-fa]');
     elements.forEach(el => {
         el.innerHTML = el.getAttribute(`data-${currentLang}`);
     });
 }
 
-// لودینگ اولیه سایت
 function startExperience() {
     const intro = document.getElementById('intro');
     const mainContent = document.getElementById('main-content');
@@ -38,12 +35,10 @@ function startExperience() {
     }, 2000);
 }
 
-// کنترل مودال‌ها
 function openModal(id) { closeModals(); document.getElementById(id).classList.add('active'); }
 function openImageModal(imgSrc) { document.getElementById('modal-img').src = imgSrc; openModal('media-modal'); }
 function closeModals() { document.querySelectorAll('.glass-panel').forEach(p => p.classList.remove('active')); }
 
-// افکت موس (نوار مغناطیسی VHS)
 const canvas = document.getElementById('interactive-canvas');
 const ctx = canvas.getContext('2d');
 let width, height;
@@ -70,7 +65,13 @@ function animateCanvas() {
         ctx.lineWidth = 12; ctx.strokeStyle = '#050505'; ctx.stroke();
     }
 
-    const nodes = [document.getElementById('node-wip'), document.getElementById('node-char'), document.getElementById('node-doll')];
+    const nodes = [
+        document.getElementById('node-char'), 
+        document.getElementById('node-doll'), 
+        document.getElementById('node-wip'),
+        document.getElementById('node-sticker')
+    ];
+    
     ctx.beginPath();
     nodes.forEach((node, idx) => {
         if(!node) return;
@@ -83,7 +84,6 @@ function animateCanvas() {
 }
 animateCanvas();
 
-// بستن مودال با کلیک در فضای خالی
 document.getElementById('main-content').addEventListener('click', (e) => {
     if(e.target.id === 'main-content' || e.target.id === 'interactive-canvas') closeModals();
 });
