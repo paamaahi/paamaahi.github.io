@@ -2,224 +2,38 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#020408">
     <title>Paamaahi | پاماهی</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #000000;
-            --neon-blue: #00f0ff;
-            --glass-bg: rgba(5, 10, 15, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --text-main: #ffffff;
-            --font-fa: 'Vazirmatn', sans-serif;
-            --font-en: 'Rajdhani', sans-serif;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-
-        body, html {
-            width: 100%; height: 100%;
-            background-color: var(--bg-color);
-            overflow: hidden;
-            font-family: var(--font-fa);
-            color: var(--text-main);
-            cursor: crosshair;
-            transition: font-family 0.3s;
-        }
-
-        /* دکمه زبان */
-        #lang-toggle {
-            position: fixed; bottom: 30px; left: 30px; z-index: 100; cursor: pointer;
-            font-family: var(--font-en); font-size: 1.1rem; letter-spacing: 2px;
-            color: #fff; text-shadow: 0 0 10px var(--neon-blue);
-            border: 1px solid rgba(0, 240, 255, 0.4); padding: 5px 12px;
-            border-radius: 4px; background: rgba(0,0,0,0.5); transition: all 0.3s;
-        }
-        #lang-toggle:hover { background: rgba(0, 240, 255, 0.2); box-shadow: 0 0 15px var(--neon-blue); }
-        html[dir="ltr"] #lang-toggle { left: auto; right: 30px; }
-
-        /* ======== بخش ورودی (اینترو) ======== */
-        #intro {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #020408; cursor: pointer;
-            z-index: 9999; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: opacity 2s ease;
-            overflow: hidden;
-        }
-        
-        /* ستاره‌های پس‌زمینه */
-        .intro-stars {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(1.5px 1.5px at 20px 30px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 80px 120px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 150px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 210px 190px, #eee, rgba(0,0,0,0));
-            background-repeat: repeat; background-size: 250px 250px;
-            opacity: 0.4; z-index: 1; animation: twinkle 8s infinite alternate;
-        }
-        @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 0.6; } }
-
-        /* ماه تکسچردار */
-        .intro-moon {
-            position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
-            width: 250px; height: 250px; border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #ffffff 10%, #d4dce5 40%, #8a96a3 80%, #303842 100%);
-            box-shadow: 
-                0 0 100px 20px rgba(180, 220, 255, 0.2), 
-                inset -25px -25px 40px rgba(0,0,0,0.8),
-                inset 10px 10px 20px rgba(255,255,255,0.9);
-            z-index: 2; transition: all 0.5s ease;
-        }
-        #intro:hover .intro-moon {
-            box-shadow: 0 0 120px 40px rgba(180, 220, 255, 0.4), inset -25px -25px 40px rgba(0,0,0,0.8), inset 10px 10px 20px rgba(255,255,255,1);
-        }
-
-        /* کانتینر گرافیک درخت و نوار */
-        .intro-art-container {
-            position: absolute; top: 15%; left: 50%; transform: translateX(-50%);
-            width: 350px; height: 350px; z-index: 3; pointer-events: none;
-        }
-        .intro-art-container svg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: visible;
-        }
-
-        /* استایل درخت */
-        .intro-branch-path {
-            fill: #04060a;
-            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.9));
-        }
-
-        /* استایل نوار مشکی با حاشیه آبی */
-        .fluid-tape {
-            fill: none;
-            stroke: #050505;
-            stroke-width: 4.5;
-            stroke-linecap: round;
-            filter: drop-shadow(0px 0px 2px #0033ff) drop-shadow(0px 0px 3px var(--neon-blue));
-        }
-        .tape-path {
-            animation: waveMotion 3.5s ease-in-out infinite alternate;
-        }
-        
-        /* انیمیشن موج خوردن نوار S شکل */
-        @keyframes waveMotion {
-            0% { d: path("M 85,22 C 60,40 30,40 40,70 C 50,90 20,100 -5,130"); }
-            100% { d: path("M 85,22 C 55,45 35,35 35,70 C 40,95 10,105 -15,120"); }
-        }
-
-        .intro-text { 
-            position: absolute; bottom: 20%; font-size: 1.2rem; font-weight: 300; text-align: center; 
-            opacity: 0.9; max-width: 600px; line-height: 2; z-index: 5; 
-            text-shadow: 0 0 15px rgba(0,0,0,1), 0 0 5px rgba(0,0,0,1); 
-        }
-
-        .click-start {
-            position: absolute; bottom: 10%; font-family: var(--font-en); 
-            font-size: 1rem; letter-spacing: 3px; color: var(--neon-blue); 
-            z-index: 5; animation: pulseText 2s infinite;
-        }
-        @keyframes pulseText { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; text-shadow: 0 0 10px var(--neon-blue); } }
-
-
-        /* ======== محتوای اصلی ======== */
-        #main-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; transition: opacity 2s ease 0.5s; }
-        #main-content.visible { opacity: 1; pointer-events: auto; }
-
-        #bg-video {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            min-width: 100%; min-height: 100%; z-index: 0; object-fit: cover;
-            opacity: 0.5; filter: brightness(110%);
-        }
-
-        .water-overlay { position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(2, 10, 20, 0.8) 100%); backdrop-filter: blur(4px); }
-        .water-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 3px, transparent 4px); animation: waterRipples 6s linear infinite; mix-blend-mode: overlay; }
-        @keyframes waterRipples { from { background-position: 0 0; } to { background-position: 0 -100px; } }
-        .bg-moon-glow { position: fixed; top: 15%; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%); z-index: 0; }
-
-        #interactive-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
-
-        #logo-trigger { position: fixed; top: 30px; right: 30px; width: 60px; height: auto; z-index: 100; cursor: pointer; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); animation: floatLogo 4s ease-in-out infinite; transition: all 0.4s; }
-        #logo-trigger:hover { filter: drop-shadow(0 0 25px var(--neon-blue)) brightness(1.5); transform: scale(1.1); }
-        html[dir="ltr"] #logo-trigger { right: auto; left: 30px; }
-        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* گره‌های دسته‌بندی */
-        .node-container { position: absolute; z-index: 10; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; }
-        .node-container:hover { transform: scale(1.2); }
-        .node-orb { width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 0 15px #fff, 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue); border: 2px solid rgba(255,255,255,0.8); position: relative; }
-        .node-orb::after { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.5); animation: pulseRing 2s infinite; }
-        @keyframes pulseRing { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
-        .node-label { margin-top: 15px; font-family: var(--font-en); font-size: 0.9rem; letter-spacing: 3px; color: #fff; text-shadow: 0 0 8px var(--neon-blue); background: rgba(0, 0, 0, 0.6); padding: 4px 10px; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 2px; }
-
-        #node-char { top: 25%; left: 20%; }
-        #node-doll { top: 55%; left: 35%; }
-        #node-wip { top: 35%; left: 75%; }
-        #node-sticker { top: 75%; left: 65%; }
-
-        /* مودال‌ها */
-        .glass-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; z-index: 200; opacity: 0; pointer-events: none; transition: all 0.4s; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-        .glass-panel.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-family: var(--font-en); font-size: 1.5rem; cursor: pointer; color: #ccc; }
-        .close-btn:hover { color: #fff; text-shadow: 0 0 10px #fff; }
-        html[dir="ltr"] .close-btn { right: auto; left: 20px; }
-
-        #media-modal { width: 350px; height: 466px; padding: 10px; display: flex; justify-content: center; align-items: center; }
-        .media-frame { width: 100%; height: 100%; border-radius: 8px; overflow: hidden; background: #000; }
-        .media-frame img { width: 100%; height: 100%; object-fit: cover; }
-        
-        #info-modal { width: 90%; max-width: 500px; text-align: center; }
-        .info-content h2 { font-family: var(--font-en); letter-spacing: 5px; font-size: 2rem; margin-bottom: 20px; color: var(--neon-blue); text-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
-        .info-content p { font-size: 1rem; line-height: 1.8; margin-bottom: 30px; color: #ddd; }
-        .contact-data { font-family: var(--font-en); display: flex; flex-direction: column; gap: 15px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
-        .contact-data a { color: #fff; text-decoration: none; }
-        .contact-data a:hover { text-shadow: 0 0 10px var(--neon-blue); }
-        .sys-badge { position: absolute; bottom: 10px; right: 10px; font-family: var(--font-en); font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
-        html[dir="ltr"] .sys-badge { right: auto; left: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div id="lang-toggle" onclick="toggleLang(event)">[ EN ]</div>
 
-    <!-- اینترو کیهانی -->
-    <div id="intro" onclick="startExperience()">
-        <div class="intro-stars"></div>
-        <div class="intro-moon"></div>
-        
-        <!-- کانتینر گرافیک (طراحی شده دقیقاً از روی نقاشی شما) -->
-        <div class="intro-art-container">
-            <!-- درخت با تنه در سمت چپ و شاخه در سمت راست -->
-            <svg viewBox="0 0 100 100">
-                <path class="intro-branch-path" d="M -20,120 L -20,-20 L 30,-20 C 30,30 40,40 60,35 L 80,15 L 82,10 L 85,15 L 95,5 L 90,15 L 100,10 L 90,25 L 60,45 C 40,60 50,80 80,120 Z" />
-            </svg>
-            
-            <!-- نوار مشکی با حاشیه آبی، آویزان از شاخه (با فرم S) -->
-            <svg viewBox="0 0 100 100">
-                <path class="fluid-tape tape-path" d="M 85,22 C 60,40 30,40 40,70 C 50,90 20,100 -5,130"></path>
-            </svg>
-        </div>
+    <!-- Intro: moon, branch and the ribbon are drawn on the canvas by script.js -->
+    <div id="intro">
+        <canvas id="intro-canvas"></canvas>
 
-        <div class="intro-text" id="intro-text" 
+        <div class="intro-text" id="intro-text"
              data-fa="نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد."
              data-en="I followed the black tape hanging from the tree<br>It showed me the path to the moon.">
             نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد.
         </div>
-        <div class="click-start" data-fa="[ برای ورود کلیک کنید ]" data-en="[ CLICK TO START ]">[ برای ورود کلیک کنید ]</div>
+        <div class="click-start" data-fa="[ برای ورود لمس کنید ]" data-en="[ TAP TO ENTER ]">[ برای ورود لمس کنید ]</div>
     </div>
 
-    <!-- محتوای سایت -->
     <div id="main-content">
         <div class="bg-moon-glow"></div>
-        
+
         <video id="bg-video" loop muted playsinline>
             <source src="assets/paamaahicover.mp4" type="video/mp4">
         </video>
-        
+
         <div class="water-overlay"></div>
         <canvas id="interactive-canvas"></canvas>
-        
+
         <img src="assets/logo.png" id="logo-trigger" onclick="openModal('info-modal')" alt="Paamaahi Logo">
 
         <div class="node-container" id="node-char" onclick="openImageModal('assets/cat_characters.jpg')">
@@ -236,20 +50,19 @@
         </div>
     </div>
 
-    <!-- مودال‌ها -->
     <div class="glass-panel" id="info-modal">
         <div class="close-btn" onclick="closeModals()">×</div>
         <div class="info-content">
             <h2>PAAMAAHI</h2>
-            <p id="about-text" 
+            <p id="about-text"
                data-fa="پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد."
                data-en="Pamahi is an independent creative brand making and selling unique handmade dolls, sculptural objects, and playful art pieces.">
                پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد.
             </p>
             <div class="contact-data">
                 <a href="mailto:paamaahi@gmail.com">MSG: paamaahi@gmail.com</a>
-                <a href="https://instagram.com/paa.maahi" target="_blank">IG: @paa.maahi</a>
-                <a href="https://youtube.com/@paamaahi" target="_blank">YT: paamaahi</a>
+                <a href="https://instagram.com/paa.maahi" target="_blank" rel="noopener">IG: @paa.maahi</a>
+                <a href="https://youtube.com/@paamaahi" target="_blank" rel="noopener">YT: paamaahi</a>
             </div>
         </div>
         <div class="sys-badge" data-fa="سیستم فعال شد // نسخه ۱.۰" data-en="SYSTEM.READY // V1.0">سیستم فعال شد // نسخه ۱.۰</div>
@@ -261,95 +74,6 @@
         <div class="sys-badge" style="bottom: -25px; right: 0;" data-fa="تصویر رندر شد" data-en="IMG_DATA.RENDERED">تصویر رندر شد</div>
     </div>
 
-    <script>
-        let currentLang = 'fa';
-
-        function toggleLang(event) {
-            if(event) event.stopPropagation();
-            const html = document.documentElement;
-            const btn = document.getElementById('lang-toggle');
-
-            if (currentLang === 'fa') {
-                currentLang = 'en';
-                html.setAttribute('lang', 'en');
-                html.setAttribute('dir', 'ltr');
-                btn.innerText = '[ FA ]';
-                document.body.style.fontFamily = "var(--font-en)";
-            } else {
-                currentLang = 'fa';
-                html.setAttribute('lang', 'fa');
-                html.setAttribute('dir', 'rtl');
-                btn.innerText = '[ EN ]';
-                document.body.style.fontFamily = "var(--font-fa)";
-            }
-
-            const elements = document.querySelectorAll('[data-fa]');
-            elements.forEach(el => { el.innerHTML = el.getAttribute(`data-${currentLang}`); });
-        }
-
-        function startExperience() {
-            const intro = document.getElementById('intro');
-            const mainContent = document.getElementById('main-content');
-            const video = document.getElementById('bg-video');
-            intro.style.opacity = '0'; intro.style.pointerEvents = 'none';
-            setTimeout(() => {
-                intro.style.display = 'none'; mainContent.classList.add('visible');
-                if(video) video.play().catch(e => console.log("Auto-play prevented."));
-            }, 2000);
-        }
-
-        function openModal(id) { closeModals(); document.getElementById(id).classList.add('active'); }
-        function openImageModal(imgSrc) { document.getElementById('modal-img').src = imgSrc; openModal('media-modal'); }
-        function closeModals() { document.querySelectorAll('.glass-panel').forEach(p => p.classList.remove('active')); }
-
-        const canvas = document.getElementById('interactive-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-
-        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
-
-        let mouse = { x: width/2, y: height/2 }, points = [];
-        document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-        function animateCanvas() {
-            ctx.clearRect(0, 0, width, height);
-            points.push({ x: mouse.x, y: mouse.y });
-            if (points.length > 40) points.shift();
-
-            if (points.length > 1) {
-                ctx.beginPath(); ctx.moveTo(points[0].x, points[0].y);
-                for (let i = 1; i < points.length; i++) {
-                    const xc = (points[i].x + points[i - 1].x) / 2, yc = (points[i].y + points[i - 1].y) / 2;
-                    ctx.quadraticCurveTo(points[i - 1].x, points[i - 1].y, xc, yc);
-                }
-                ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-                ctx.lineWidth = 18; ctx.strokeStyle = 'rgba(0, 240, 255, 0.3)'; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
-                ctx.lineWidth = 12; ctx.strokeStyle = '#050505'; ctx.stroke();
-            }
-
-            const nodes = [
-                document.getElementById('node-char'), 
-                document.getElementById('node-doll'), 
-                document.getElementById('node-wip'),
-                document.getElementById('node-sticker')
-            ];
-            
-            ctx.beginPath();
-            nodes.forEach((node, idx) => {
-                if(!node) return;
-                const rect = node.getBoundingClientRect(), nx = rect.left + rect.width / 2, ny = rect.top + rect.height / 2;
-                if(idx === 0) ctx.moveTo(nx, ny); else ctx.lineTo(nx, ny);
-                if(Math.hypot(nx - mouse.x, ny - mouse.y) < 250) { ctx.moveTo(nx, ny); ctx.lineTo(mouse.x, mouse.y); }
-            });
-            ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)'; ctx.stroke();
-            requestAnimationFrame(animateCanvas);
-        }
-        animateCanvas();
-
-        document.getElementById('main-content').addEventListener('click', (e) => {
-            if(e.target.id === 'main-content' || e.target.id === 'interactive-canvas') closeModals();
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 </html>
