@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paamaahi | پاماهی</title>
-    <!-- اتصال فونت‌ها -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- دکمه تغییر زبان -->
     <div id="lang-toggle" onclick="toggleLang()">[ EN ]</div>
 
-    <!-- صفحه ورود -->
     <div id="intro">
         <div class="intro-decor"><div class="hanging-tape"></div></div>
         <div class="realistic-moon" onclick="startExperience()"></div>
@@ -24,40 +21,39 @@
         </div>
     </div>
 
-    <!-- محتوای اصلی -->
     <div id="main-content">
         <div class="bg-moon-glow"></div>
         
-        <!-- ویدیو با افکت نورانی و درخشان -->
         <video id="bg-video" loop muted playsinline>
             <source src="assets/paamaahicover.mp4" type="video/mp4">
         </video>
         
         <div class="water-overlay"></div>
         <canvas id="interactive-canvas"></canvas>
-        <img src="assets/logo.png" id="logo-trigger" onclick="openModal('info-modal')" alt="Paamaahi Logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 50\' fill=\'white\'><circle cx=\'25\' cy=\'25\' r=\'20\'/></svg>'">
+        <img src="assets/logo.png" id="logo-trigger" onclick="openModal('info-modal')" alt="Paamaahi Logo">
 
-        <!-- گره‌های دسته‌بندی -->
-        <div class="node-container" id="node-wip" onclick="openImageModal('assets/cat_wip.jpg')">
-            <div class="node-orb"></div><div class="node-label" data-fa="[ سیستم: در حال ساخت ]" data-en="[ SYS: WIP ]">[ سیستم: در حال ساخت ]</div>
-        </div>
         <div class="node-container" id="node-char" onclick="openImageModal('assets/cat_characters.jpg')">
-            <div class="node-orb"></div><div class="node-label" data-fa="[ فایل: کاراکترها ]" data-en="[ FILE: CHARACTERS ]">[ فایل: کاراکترها ]</div>
+            <div class="node-orb"></div><div class="node-label" data-fa="[ کاراکتر ها ]" data-en="[ CHARACTERS ]">[ کاراکتر ها ]</div>
         </div>
         <div class="node-container" id="node-doll" onclick="openImageModal('assets/cat_dolls.jpg')">
-            <div class="node-orb"></div><div class="node-label" data-fa="[ داده: مجسمه و عروسک ]" data-en="[ DATA: DOLLS ]">[ داده: مجسمه و عروسک ]</div>
+            <div class="node-orb"></div><div class="node-label" data-fa="[ مجسمه ها ]" data-en="[ SCULPTURES ]">[ مجسمه ها ]</div>
+        </div>
+        <div class="node-container" id="node-wip" onclick="openImageModal('assets/cat_wip.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ درحال ساخت ]" data-en="[ WIP ]">[ درحال ساخت ]</div>
+        </div>
+        <div class="node-container" id="node-sticker" onclick="openImageModal('assets/cat_stickers.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ استیکر ها ]" data-en="[ STICKERS ]">[ استیکر ها ]</div>
         </div>
     </div>
 
-    <!-- مودال اطلاعات -->
     <div class="glass-panel" id="info-modal">
         <div class="close-btn" onclick="closeModals()">×</div>
         <div class="info-content">
             <h2>PAAMAAHI</h2>
             <p id="about-text" 
-               data-fa="پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد. پاماهی با ترکیب تخیل، مهارت و بیان هنری، کاراکترها و اشیاء غیرمنتظره را به زندگی می‌آورد."
-               data-en="Pamahi is an independent creative brand making and selling unique handmade dolls, sculptural objects, and playful art pieces. Blending imagination, craftsmanship, and artistic expression, Pamahi brings unexpected characters and objects to life.">
-               پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد. پاماهی با ترکیب تخیل، مهارت و بیان هنری، کاراکترها و اشیاء غیرمنتظره را به زندگی می‌آورد.
+               data-fa="پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد."
+               data-en="Pamahi is an independent creative brand making and selling unique handmade dolls, sculptural objects, and playful art pieces.">
+               پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد.
             </p>
             <div class="contact-data">
                 <a href="mailto:paamaahi@gmail.com">MSG: paamaahi@gmail.com</a>
@@ -68,14 +64,12 @@
         <div class="sys-badge" data-fa="سیستم فعال شد // نسخه ۱.۰" data-en="SYSTEM.READY // V1.0">سیستم فعال شد // نسخه ۱.۰</div>
     </div>
 
-    <!-- مودال تصاویر -->
     <div class="glass-panel" id="media-modal">
         <div class="close-btn" onclick="closeModals()" style="right: auto; left: 10px; top: 10px;">×</div>
         <div class="media-frame"><img id="modal-img" src="" alt="Paamaahi Artwork"></div>
         <div class="sys-badge" style="bottom: -25px; right: 0;" data-fa="تصویر رندر شد" data-en="IMG_DATA.RENDERED">تصویر رندر شد</div>
     </div>
 
-    <!-- اتصال فایل جاوااسکریپت -->
     <script src="main.js"></script>
 </body>
 </html>
