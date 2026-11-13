@@ -39,49 +39,36 @@
         #lang-toggle:hover { background: rgba(0, 240, 255, 0.2); box-shadow: 0 0 15px var(--neon-blue); }
         html[dir="ltr"] #lang-toggle { left: auto; right: 30px; }
 
-        /* صفحه ورود با عکس */
+        /* صفحه ورود */
         #intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: #000; cursor: pointer;
+            background: linear-gradient(to bottom, #000000, #050a12);
             z-index: 9999; display: flex; flex-direction: column;
             justify-content: center; align-items: center; transition: opacity 2s ease;
         }
-        
-        .intro-image-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: url('assets/intro-image.jpg') no-repeat center center;
-            background-size: cover; opacity: 0.5; z-index: 1;
-        }
 
-        .hanging-tape {
-            position: absolute; top: 0; left: 45%; width: 5px; height: 250px; 
-            background: #000; box-shadow: 1px 0 3px rgba(255,255,255,0.4); 
-            transform-origin: top; animation: swing 3.5s ease-in-out infinite alternate; z-index: 2;
+        .realistic-moon {
+            width: 150px; height: 150px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff, #cdd5e0 40%, #5a6675 80%, #000 100%);
+            box-shadow: 0 0 80px 20px rgba(200, 230, 255, 0.4), inset -15px -15px 30px rgba(0,0,0,0.8);
+            cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; z-index: 2;
         }
+        .realistic-moon:hover { transform: scale(1.05); box-shadow: 0 0 120px 30px rgba(255, 255, 255, 0.6), inset -15px -15px 30px rgba(0,0,0,0.8); }
+        .intro-text { margin-top: 40px; font-size: 1.2rem; font-weight: 300; text-align: center; opacity: 0.8; max-width: 600px; line-height: 2; z-index: 2; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .intro-decor { position: absolute; bottom: 0; left: 10%; width: 300px; height: 400px; background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 100 Q45 50 20 20 Q45 40 50 10 Q55 40 80 15 Q55 50 50 100" fill="black"/></svg>') no-repeat bottom center; background-size: contain; z-index: 1; }
+        .hanging-tape { position: absolute; top: 20%; left: 45%; width: 4px; height: 150px; background: #000; box-shadow: 1px 0 2px rgba(255,255,255,0.3); transform-origin: top; animation: swing 4s ease-in-out infinite alternate; }
         @keyframes swing { 0% { transform: rotate(-5deg); } 100% { transform: rotate(15deg); } }
-
-        .intro-text { 
-            position: relative; font-size: 1.2rem; font-weight: 300; text-align: center; 
-            opacity: 0.9; max-width: 600px; line-height: 2; z-index: 3; 
-            text-shadow: 0 0 15px rgba(0,0,0,1), 0 0 5px rgba(0,0,0,1); 
-        }
-
-        .click-start {
-            position: relative; margin-top: 30px; font-family: var(--font-en); 
-            font-size: 1rem; letter-spacing: 3px; color: var(--neon-blue); 
-            z-index: 3; animation: pulseText 2s infinite;
-        }
-        @keyframes pulseText { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; text-shadow: 0 0 10px var(--neon-blue); } }
 
         /* محتوای اصلی */
         #main-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; transition: opacity 2s ease 0.5s; }
         #main-content.visible { opacity: 1; pointer-events: auto; }
 
-        /* ویدیو پس‌زمینه شفاف */
+        /* تنظیمات درست ویدیو (بدون تخریب رنگ کاراکترها) */
         #bg-video {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
             min-width: 100%; min-height: 100%; z-index: 0; object-fit: cover;
-            opacity: 0.5; filter: brightness(110%);
+            opacity: 0.5; /* شفافیت ملایم */
+            filter: brightness(110%); /* حفظ رنگ طبیعی و فقط کمی روشن‌تر */
         }
 
         .water-overlay { position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(2, 10, 20, 0.8) 100%); backdrop-filter: blur(4px); }
@@ -109,7 +96,7 @@
         #node-wip { top: 35%; left: 75%; }
         #node-sticker { top: 75%; left: 65%; }
 
-        /* مودال‌ها (نسبت ۳ در ۴ برای کارها) */
+        /* مودال‌ها (پنجره‌های پاپ‌آپ) */
         .glass-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; z-index: 200; opacity: 0; pointer-events: none; transition: all 0.4s; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
         .glass-panel.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
         .close-btn { position: absolute; top: 15px; right: 20px; font-family: var(--font-en); font-size: 1.5rem; cursor: pointer; color: #ccc; }
@@ -134,16 +121,14 @@
 
     <div id="lang-toggle" onclick="toggleLang()">[ EN ]</div>
 
-    <!-- اینترو با بک‌گراند عکس و نوار متحرک -->
-    <div id="intro" onclick="startExperience()">
-        <div class="intro-image-bg"></div>
-        <div class="hanging-tape"></div>
+    <div id="intro">
+        <div class="intro-decor"><div class="hanging-tape"></div></div>
+        <div class="realistic-moon" onclick="startExperience()"></div>
         <div class="intro-text" id="intro-text" 
              data-fa="نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد."
              data-en="I followed the black tape hanging from the tree<br>It showed me the path to the moon.">
             نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد.
         </div>
-        <div class="click-start" data-fa="[ برای ورود کلیک کنید ]" data-en="[ CLICK TO START ]">[ برای ورود کلیک کنید ]</div>
     </div>
 
     <div id="main-content">
