@@ -28,6 +28,7 @@
             transition: font-family 0.3s;
         }
 
+        /* دکمه زبان */
         #lang-toggle {
             position: fixed; bottom: 30px; left: 30px; z-index: 100; cursor: pointer;
             font-family: var(--font-en); font-size: 1.1rem; letter-spacing: 2px;
@@ -38,7 +39,7 @@
         #lang-toggle:hover { background: rgba(0, 240, 255, 0.2); box-shadow: 0 0 15px var(--neon-blue); }
         html[dir="ltr"] #lang-toggle { left: auto; right: 30px; }
 
-        /* Intro Redesign: Atmospheric Moon, Branch & Fluid Tape */
+        /* ======== بخش ورودی (اینترو) ======== */
         #intro {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-color: #020408; cursor: pointer;
@@ -47,105 +48,61 @@
             overflow: hidden;
         }
         
-        /* Starry background subtle effect */
+        /* ستاره‌های ظریف پس‌زمینه */
         .intro-stars {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
-                radial-gradient(1px 1px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 130px 80px, #fff, rgba(0,0,0,0)),
-                radial-gradient(1.5px 1.5px at 160px 120px, #ddd, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            opacity: 0.3;
-            z-index: 1;
+                radial-gradient(1.5px 1.5px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 80px 120px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 150px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 210px 190px, #eee, rgba(0,0,0,0));
+            background-repeat: repeat; background-size: 250px 250px;
+            opacity: 0.4; z-index: 1; animation: twinkle 8s infinite alternate;
         }
+        @keyframes twinkle { 0% { opacity: 0.2; } 100% { opacity: 0.6; } }
 
-        /* Textured Moon */
+        /* ماه واقعی و تکسچردار */
         .intro-moon {
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220px; height: 220px;
-            border-radius: 50%;
-            background: 
-                radial-gradient(circle at 30% 30%, transparent 40%, rgba(0,0,0,0.4) 80%),
-                radial-gradient(circle at 60% 70%, rgba(0,0,0,0.3) 10%, transparent 30%),
-                radial-gradient(circle at 25% 65%, rgba(0,0,0,0.2) 15%, transparent 35%),
-                radial-gradient(circle at 75% 40%, rgba(0,0,0,0.15) 20%, transparent 45%),
-                #e0e6ed;
+            position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+            width: 250px; height: 250px; border-radius: 50%;
+            /* گردینت‌های تو در تو برای ایجاد بافت */
+            background: radial-gradient(circle at 35% 35%, #ffffff 10%, #d4dce5 40%, #8a96a3 80%, #303842 100%);
             box-shadow: 
-                0 0 100px 30px rgba(180, 220, 255, 0.2), 
-                inset -20px -20px 50px rgba(0,0,0,0.8),
-                inset 10px 10px 20px rgba(255,255,255,0.8);
-            z-index: 2;
-            transition: all 0.5s ease;
-            filter: contrast(1.1) drop-shadow(0 0 15px rgba(255,255,255,0.4));
-        }
-        
-        #intro:hover .intro-moon {
-            box-shadow: 
-                0 0 120px 40px rgba(180, 220, 255, 0.4), 
-                inset -20px -20px 50px rgba(0,0,0,0.8),
+                0 0 100px 20px rgba(180, 220, 255, 0.2), 
+                inset -25px -25px 40px rgba(0,0,0,0.8),
                 inset 10px 10px 20px rgba(255,255,255,0.9);
-            filter: contrast(1.2) drop-shadow(0 0 25px rgba(255,255,255,0.6));
+            z-index: 2; transition: all 0.5s ease;
+        }
+        #intro:hover .intro-moon {
+            box-shadow: 0 0 120px 40px rgba(180, 220, 255, 0.4), inset -25px -25px 40px rgba(0,0,0,0.8), inset 10px 10px 20px rgba(255,255,255,1);
         }
 
-        /* Branch Silhouette crossing the moon */
+        /* شاخه درخت درختی */
         .intro-branch {
-            position: absolute;
-            top: 15%;
-            left: 55%;
-            width: 350px;
-            height: 200px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100"><path d="M200 0 Q150 10 100 30 T20 60 Q30 40 100 20 Q160 5 200 -10 Z" fill="black"/><path d="M120 25 Q90 50 60 70 Q75 60 110 35 Z" fill="black"/><path d="M80 45 Q60 80 40 95 Q65 75 85 45 Z" fill="black"/></svg>') no-repeat;
-            background-size: contain;
-            transform: rotate(15deg);
-            z-index: 3;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.8));
-            pointer-events: none;
+            position: absolute; top: 22%; left: 50%; transform: translateX(-30%) rotate(15deg);
+            width: 350px; height: 250px; z-index: 3;
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.9)); pointer-events: none;
         }
 
-        /* Fluid SVG Tape */
+        /* نوار براق متحرک */
         .intro-tape-container {
-            position: absolute;
-            top: 40%;
-            left: 52%;
-            width: 40px;
-            height: 300px;
-            z-index: 4;
-            pointer-events: none;
+            position: absolute; top: 40%; left: 55%; width: 50px; height: 350px;
+            z-index: 4; pointer-events: none;
         }
-
         .fluid-tape {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: #0a0a0a;
-            stroke-width: 6;
-            stroke-linecap: round;
-            filter: drop-shadow(2px 0px 1px rgba(255,255,255,0.4)) drop-shadow(-1px 0px 2px rgba(0, 240, 255, 0.2));
-            animation: fluidSwing 6s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+            width: 100%; height: 100%; fill: none; stroke: #0a0a0a;
+            stroke-width: 10; stroke-linecap: round;
+            /* افکت برقی/براق روی نوار مشکی */
+            filter: drop-shadow(2px 0px 1px rgba(255,255,255,0.5)) drop-shadow(-2px 0px 3px rgba(0, 240, 255, 0.4));
+            animation: fluidSwing 5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate;
             transform-origin: top center;
         }
-
-        @keyframes fluidSwing {
-            0% { transform: rotate(-8deg); }
-            50% { transform: rotate(5deg) scaleY(1.02); }
-            100% { transform: rotate(-3deg); }
-        }
-
-        .tape-path {
-            animation: waveMotion 4s ease-in-out infinite alternate;
-        }
-
+        @keyframes fluidSwing { 0% { transform: rotate(-8deg); } 100% { transform: rotate(10deg); } }
+        
+        .tape-path { animation: waveMotion 3s ease-in-out infinite alternate; }
         @keyframes waveMotion {
-            0% { d: path("M20,0 C35,50 5,100 20,150 C35,200 5,250 20,300"); }
-            50% { d: path("M20,0 C5,50 35,100 20,150 C5,200 35,250 20,300"); }
-            100% { d: path("M20,0 C25,50 15,100 20,150 C25,200 15,250 20,300"); }
+            0% { d: path("M25,0 C40,50 10,150 25,250 C40,300 10,350 25,400"); }
+            100% { d: path("M25,0 C10,50 40,150 25,250 C10,300 40,350 25,400"); }
         }
 
         .intro-text { 
@@ -161,6 +118,8 @@
         }
         @keyframes pulseText { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; text-shadow: 0 0 10px var(--neon-blue); } }
 
+
+        /* ======== محتوای اصلی ======== */
         #main-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; transition: opacity 2s ease 0.5s; }
         #main-content.visible { opacity: 1; pointer-events: auto; }
 
@@ -172,4 +131,222 @@
 
         .water-overlay { position: fixed; bottom: 0; left: 0; width: 100%; height: 35vh; z-index: 1; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(2, 10, 20, 0.8) 100%); backdrop-filter: blur(4px); }
         .water-overlay::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 3px, transparent 4px); animation: waterRipples 6s linear infinite; mix-blend-mode: overlay; }
-        @keyframes waterR
+        @keyframes waterRipples { from { background-position: 0 0; } to { background-position: 0 -100px; } }
+        .bg-moon-glow { position: fixed; top: 15%; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%); z-index: 0; }
+
+        #interactive-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; pointer-events: none; }
+
+        #logo-trigger { position: fixed; top: 30px; right: 30px; width: 60px; height: auto; z-index: 100; cursor: pointer; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); animation: floatLogo 4s ease-in-out infinite; transition: all 0.4s; }
+        #logo-trigger:hover { filter: drop-shadow(0 0 25px var(--neon-blue)) brightness(1.5); transform: scale(1.1); }
+        html[dir="ltr"] #logo-trigger { right: auto; left: 30px; }
+        @keyframes floatLogo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* گره‌های دسته‌بندی */
+        .node-container { position: absolute; z-index: 10; display: flex; flex-direction: column; align-items: center; cursor: pointer; transition: transform 0.3s; }
+        .node-container:hover { transform: scale(1.2); }
+        .node-orb { width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 0 15px #fff, 0 0 30px var(--neon-blue), 0 0 45px var(--neon-blue); border: 2px solid rgba(255,255,255,0.8); position: relative; }
+        .node-orb::after { content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px; border-radius: 50%; border: 1px solid rgba(0, 240, 255, 0.5); animation: pulseRing 2s infinite; }
+        @keyframes pulseRing { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+        .node-label { margin-top: 15px; font-family: var(--font-en); font-size: 0.9rem; letter-spacing: 3px; color: #fff; text-shadow: 0 0 8px var(--neon-blue); background: rgba(0, 0, 0, 0.6); padding: 4px 10px; border: 1px solid rgba(0, 240, 255, 0.3); border-radius: 2px; }
+
+        #node-char { top: 25%; left: 20%; }
+        #node-doll { top: 55%; left: 35%; }
+        #node-wip { top: 35%; left: 75%; }
+        #node-sticker { top: 75%; left: 65%; }
+
+        /* مودال‌ها */
+        .glass-panel { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9); background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px; z-index: 200; opacity: 0; pointer-events: none; transition: all 0.4s; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
+        .glass-panel.active { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-family: var(--font-en); font-size: 1.5rem; cursor: pointer; color: #ccc; }
+        .close-btn:hover { color: #fff; text-shadow: 0 0 10px #fff; }
+        html[dir="ltr"] .close-btn { right: auto; left: 20px; }
+
+        #media-modal { width: 350px; height: 466px; padding: 10px; display: flex; justify-content: center; align-items: center; }
+        .media-frame { width: 100%; height: 100%; border-radius: 8px; overflow: hidden; background: #000; }
+        .media-frame img { width: 100%; height: 100%; object-fit: cover; }
+        
+        #info-modal { width: 90%; max-width: 500px; text-align: center; }
+        .info-content h2 { font-family: var(--font-en); letter-spacing: 5px; font-size: 2rem; margin-bottom: 20px; color: var(--neon-blue); text-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
+        .info-content p { font-size: 1rem; line-height: 1.8; margin-bottom: 30px; color: #ddd; }
+        .contact-data { font-family: var(--font-en); display: flex; flex-direction: column; gap: 15px; margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .contact-data a { color: #fff; text-decoration: none; }
+        .contact-data a:hover { text-shadow: 0 0 10px var(--neon-blue); }
+        .sys-badge { position: absolute; bottom: 10px; right: 10px; font-family: var(--font-en); font-size: 0.7rem; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
+        html[dir="ltr"] .sys-badge { right: auto; left: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="lang-toggle" onclick="toggleLang(event)">[ EN ]</div>
+
+    <!-- اینترو کیهانی -->
+    <div id="intro" onclick="startExperience()">
+        <div class="intro-stars"></div>
+        <div class="intro-moon"></div>
+        
+        <!-- شاخه ایمن با SVG -->
+        <svg class="intro-branch" viewBox="0 0 200 100" preserveAspectRatio="none">
+            <path d="M200 0 Q150 10 100 30 T20 60 Q30 40 100 20 Q160 5 200 -10 Z" fill="#04060a"/>
+            <path d="M120 25 Q90 50 60 70 Q75 60 110 35 Z" fill="#04060a"/>
+            <path d="M80 45 Q60 80 40 95 Q65 75 85 45 Z" fill="#04060a"/>
+        </svg>
+
+        <!-- نوار مواج ایمن -->
+        <div class="intro-tape-container">
+            <svg class="fluid-tape" viewBox="0 0 50 400" preserveAspectRatio="none">
+                <path class="tape-path" d="M25,0 C40,50 10,150 25,250 C40,300 10,350 25,400"></path>
+            </svg>
+        </div>
+
+        <div class="intro-text" id="intro-text" 
+             data-fa="نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد."
+             data-en="I followed the black tape hanging from the tree<br>It showed me the path to the moon.">
+            نوار مشکی که به درخت آویزون بود رو دنبال کردم<br>اون مسیر ماه رو بهم نشون داد.
+        </div>
+        <div class="click-start" data-fa="[ برای ورود کلیک کنید ]" data-en="[ CLICK TO START ]">[ برای ورود کلیک کنید ]</div>
+    </div>
+
+    <!-- محتوای سایت -->
+    <div id="main-content">
+        <div class="bg-moon-glow"></div>
+        
+        <video id="bg-video" loop muted playsinline>
+            <source src="assets/paamaahicover.mp4" type="video/mp4">
+        </video>
+        
+        <div class="water-overlay"></div>
+        <canvas id="interactive-canvas"></canvas>
+        
+        <img src="assets/logo.png" id="logo-trigger" onclick="openModal('info-modal')" alt="Paamaahi Logo">
+
+        <div class="node-container" id="node-char" onclick="openImageModal('assets/cat_characters.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ کاراکتر ها ]" data-en="[ CHARACTERS ]">[ کاراکتر ها ]</div>
+        </div>
+        <div class="node-container" id="node-doll" onclick="openImageModal('assets/cat_dolls.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ مجسمه ها ]" data-en="[ SCULPTURES ]">[ مجسمه ها ]</div>
+        </div>
+        <div class="node-container" id="node-wip" onclick="openImageModal('assets/cat_wip.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ درحال ساخت ]" data-en="[ WIP ]">[ درحال ساخت ]</div>
+        </div>
+        <div class="node-container" id="node-sticker" onclick="openImageModal('assets/cat_stickers.jpg')">
+            <div class="node-orb"></div><div class="node-label" data-fa="[ استیکر ها ]" data-en="[ STICKERS ]">[ استیکر ها ]</div>
+        </div>
+    </div>
+
+    <!-- مودال‌ها -->
+    <div class="glass-panel" id="info-modal">
+        <div class="close-btn" onclick="closeModals()">×</div>
+        <div class="info-content">
+            <h2>PAAMAAHI</h2>
+            <p id="about-text" 
+               data-fa="پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد."
+               data-en="Pamahi is an independent creative brand making and selling unique handmade dolls, sculptural objects, and playful art pieces.">
+               پاماهی یک برند خلاق مستقل است که به ساخت و فروش عروسک‌های دست‌ساز، اشیاء مجسمه‌سازی و آثار هنری خلاقانه می‌پردازد.
+            </p>
+            <div class="contact-data">
+                <a href="mailto:paamaahi@gmail.com">MSG: paamaahi@gmail.com</a>
+                <a href="https://instagram.com/paa.maahi" target="_blank">IG: @paa.maahi</a>
+                <a href="https://youtube.com/@paamaahi" target="_blank">YT: paamaahi</a>
+            </div>
+        </div>
+        <div class="sys-badge" data-fa="سیستم فعال شد // نسخه ۱.۰" data-en="SYSTEM.READY // V1.0">سیستم فعال شد // نسخه ۱.۰</div>
+    </div>
+
+    <div class="glass-panel" id="media-modal">
+        <div class="close-btn" onclick="closeModals()" style="right: auto; left: 10px; top: 10px;">×</div>
+        <div class="media-frame"><img id="modal-img" src="" alt="Paamaahi Artwork"></div>
+        <div class="sys-badge" style="bottom: -25px; right: 0;" data-fa="تصویر رندر شد" data-en="IMG_DATA.RENDERED">تصویر رندر شد</div>
+    </div>
+
+    <script>
+        let currentLang = 'fa';
+
+        function toggleLang(event) {
+            if(event) event.stopPropagation();
+            const html = document.documentElement;
+            const btn = document.getElementById('lang-toggle');
+
+            if (currentLang === 'fa') {
+                currentLang = 'en';
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                btn.innerText = '[ FA ]';
+                document.body.style.fontFamily = "var(--font-en)";
+            } else {
+                currentLang = 'fa';
+                html.setAttribute('lang', 'fa');
+                html.setAttribute('dir', 'rtl');
+                btn.innerText = '[ EN ]';
+                document.body.style.fontFamily = "var(--font-fa)";
+            }
+
+            const elements = document.querySelectorAll('[data-fa]');
+            elements.forEach(el => { el.innerHTML = el.getAttribute(`data-${currentLang}`); });
+        }
+
+        function startExperience() {
+            const intro = document.getElementById('intro');
+            const mainContent = document.getElementById('main-content');
+            const video = document.getElementById('bg-video');
+            intro.style.opacity = '0'; intro.style.pointerEvents = 'none';
+            setTimeout(() => {
+                intro.style.display = 'none'; mainContent.classList.add('visible');
+                if(video) video.play().catch(e => console.log("Auto-play prevented."));
+            }, 2000);
+        }
+
+        function openModal(id) { closeModals(); document.getElementById(id).classList.add('active'); }
+        function openImageModal(imgSrc) { document.getElementById('modal-img').src = imgSrc; openModal('media-modal'); }
+        function closeModals() { document.querySelectorAll('.glass-panel').forEach(p => p.classList.remove('active')); }
+
+        const canvas = document.getElementById('interactive-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+
+        let mouse = { x: width/2, y: height/2 }, points = [];
+        document.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            points.push({ x: mouse.x, y: mouse.y });
+            if (points.length > 40) points.shift();
+
+            if (points.length > 1) {
+                ctx.beginPath(); ctx.moveTo(points[0].x, points[0].y);
+                for (let i = 1; i < points.length; i++) {
+                    const xc = (points[i].x + points[i - 1].x) / 2, yc = (points[i].y + points[i - 1].y) / 2;
+                    ctx.quadraticCurveTo(points[i - 1].x, points[i - 1].y, xc, yc);
+                }
+                ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+                ctx.lineWidth = 18; ctx.strokeStyle = 'rgba(0, 240, 255, 0.3)'; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+                ctx.lineWidth = 12; ctx.strokeStyle = '#050505'; ctx.stroke();
+            }
+
+            const nodes = [
+                document.getElementById('node-char'), 
+                document.getElementById('node-doll'), 
+                document.getElementById('node-wip'),
+                document.getElementById('node-sticker')
+            ];
+            
+            ctx.beginPath();
+            nodes.forEach((node, idx) => {
+                if(!node) return;
+                const rect = node.getBoundingClientRect(), nx = rect.left + rect.width / 2, ny = rect.top + rect.height / 2;
+                if(idx === 0) ctx.moveTo(nx, ny); else ctx.lineTo(nx, ny);
+                if(Math.hypot(nx - mouse.x, ny - mouse.y) < 250) { ctx.moveTo(nx, ny); ctx.lineTo(mouse.x, mouse.y); }
+            });
+            ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)'; ctx.stroke();
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        document.getElementById('main-content').addEventListener('click', (e) => {
+            if(e.target.id === 'main-content' || e.target.id === 'interactive-canvas') closeModals();
+        });
+    </script>
+</body>
+</html>
